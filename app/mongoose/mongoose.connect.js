@@ -10,7 +10,9 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 
- mongoose.connect(process.env.mongourl,{
+// mongoose.connect(process.env.mongourl,{
+  mongoose.connect("mongodb://localhost:27017/fundoo-notes",{
+
         useNewUrlParser: true,
         useFindAndModify:false,
         useCreateIndex:true

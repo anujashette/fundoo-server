@@ -67,8 +67,10 @@ var j = schedule.scheduleJob('0 58 19 * * ?', ()=>{
 /**
  * Listen method create listener on specific port
  */
-var server = app.listen(process.env.port, function () {
-    console.log("app running on port.",process.env.port);
+//var server = app.listen(process.env.port, function () {
+  var server = app.listen(6006, function () {
+
+    console.log("app running on port ",6006);
 });
 
 /**

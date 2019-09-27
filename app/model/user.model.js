@@ -102,7 +102,8 @@ User.prototype.create = async (body) => {
                     log.logger.info(saveUser)     
 
                     emailToken = await genTokenObj.genToken(newUser)    //Generate token
-                    url = process.env.emailurl + emailToken;
+                    // url = process.env.emailurl + emailToken;
+                    url = "http://localhost:6006/user/authorization/" + emailToken
                     log.logger.info(url)
                     let mailContents = {
                         subject:'Fundoo Notes Verify Email...!',
