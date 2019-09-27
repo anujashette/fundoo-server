@@ -453,7 +453,8 @@ NoteController.prototype.latestNotes = async (req, res) => {
         }
         let redisNotes = await redisObj.getData(client, param)
             console.log("redis notes only", redisNotes);
-
+        console.log('gjhg');
+        
         // if (redisNotes) {
         //     let response = {
         //         status: true,
