@@ -18,8 +18,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const routes = require("./app/router/router.js");
 var expressValidator = require("express-validator");
-const swaggerUi = require('swagger-ui-express')
-const swaggerDocument = require('../server/Swagger/swagger.json')
+// const swaggerUi = require('swagger-ui-express')
+// const swaggerDocument = require('../server/Swagger/swagger.json')
 var app = express();
 const mongoose = require('./app/mongoose/mongoose.connect')
 const cors = require('cors')
@@ -34,7 +34,7 @@ require('dotenv').config()
   */
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/swagger',swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+// app.use('/swagger',swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 /**
  * Express validator validate request body used throughout application
  */
