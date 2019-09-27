@@ -1,0 +1,157 @@
+{
+    "user": {
+        "email": "anuja18@gmail.com",
+        "firstname": "anuja",
+        "lastname": "shette",
+        "password": "123456"
+    },
+    "userinvalid": {
+        "email": "shette.anujagmail",
+        "firstname": "",
+        "lastname": "shette",
+        "password": "123456"
+    },
+    "userexist": {
+        "email": "anuja1@gmail.com",
+        "firstname": "anuja",
+        "lastname": "shette",
+        "password": "123456"
+    },
+    "userlogin": {
+        "email": "shette.anuja@gmail.com",
+        "password": "abc@123"
+    },
+    "invalidinput": {
+        "email": "shette.anujagmail",
+        "password": ""
+    },
+    "userincorrect": {
+        "email": "anujashette@gmail.com",
+        "password": "123456"
+    },
+    "headers": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjoiNWQ0MTJkNzVlZTFkNjEyZjY5YmNhMDk5In0sImlhdCI6MTU2NTQyNjc4MywiZXhwIjoxNTY1NTEzMTgzfQ.PktvF-tw-xT3_aSdZLBwv-oJs831_B7phDrA7U_XcIE"
+    },
+    "invalidtoken": {
+        "headers": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjoiNWQ0MTJkNzVlZTFkNjEy"
+        }
+    },
+    "forgetpassvalid": {
+        "email": "shette.anuja@gmail.com"
+    },
+    "forgetpassinvalid": {
+        "email": "shetteanuja"
+    },
+    "forgetpassno": {
+        "email": "noeamilid@gmail.com"
+    },
+    "reset": {
+        "password": "abc@123"
+    },
+    "resetpassinvalid": {
+        "password": "123"
+    },
+    "addnote": {
+        "title": "anuja note unique1",
+        "description": "note desc from fundoo"
+    },
+    "addexistnote": {
+        "title": "anuja note 3333",
+        "description": "note desc from fundoo"
+    },
+    "addemptytitle": {
+        "title": "",
+        "description": ""
+    },
+    "updateTitle": {
+        "title": "anuja note 122",
+        "noteId": "5d4d6f915d346b3259cce213"
+    },
+    "notitle": {
+        "title": "anuja note 2222",
+        "noteId": "InvalidId"
+    },
+    "updateemptytitle": {
+        "title": "",
+        "noteId": "5d447ae096adc203a1ab5eef"
+    },
+    "updatedesc": {
+        "description": "anuja note 122",
+        "noteId": "5d4d6f915d346b3259cce213"
+    },
+    "nodesc": {
+        "description": "anuja note 2222",
+        "noteId": "InvalidId"
+    },
+    "updatecolor": {
+        "notecolor": "black",
+        "noteId": "5d4d6f915d346b3259cce213"
+    },
+    "nocolor": {
+        "notecolor": "white",
+        "noteId": "InvalidId"
+    },
+    "updateremind": {
+        "reminder": "4/8/2019 T12:04",
+        "noteId": "5d4d6f915d346b3259cce213"
+    },
+    "noremind": {
+        "color": "4/8/2019 T12:04",
+        "noteId": "InvalidId"
+    },
+    "unsetremind": {
+        "reminder": "4/8/2019 T12:04",
+        "noteId": "5d4d6f915d346b3259cce213"
+    },
+    "nounsetremind": {
+        "color": "4/8/2019 T12:04",
+        "noteId": "InvalidId"
+    },
+    "noteId":{
+        "noteId":"5d4d6f915d346b3259cce213"
+    },
+    "trashNoteId":{
+        "noteId":"5d4d702e4f591c333fe31798"
+    },
+    "nonoteId":{
+        "noteId":"InvalidId"
+    },
+    "delnoteId":{
+        "noteId":"5d4e5f862e6d9a38bec3f6cd"
+    },
+    "delnonoteId":{
+        "noteId":"InvalidId"
+    },
+    "addlabel":{
+        "label":"new label testing"
+    },
+    "emptylabel":{
+        "label":""
+    },
+    "updatelabel":{
+        "labelId":"5d4d7bf0d54d00457a170aa2",
+        "label":"new label testing"
+    },
+    "wrongLabelId":{
+        "labelId":"5643535",
+        "label":"new label testing"
+    },
+    "deleteLabel":{
+        "labelId":"5d4e5faf2e6d9a38bec3f6d1"
+    },
+    "wrongLabel":{
+        "labelId":"5643535"
+    },
+    "addLabelToNote":{
+        "labelId":"5d4c26c15ba2060801ff60ef",
+        "noteId":"5d4c1909b02d86754891d21b"
+    },
+    "wrongLabelToNote":{
+        "labelId":"5d4c26c15ba2060801ff60ef",
+        "noteId":"5d4c16508a8bbd7193e4c69"
+    },
+    "updateNotifyLink":{
+        "notifylink":"updated firebase link testcase"
+    }
+}

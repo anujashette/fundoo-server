@@ -1,0 +1,905 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Fundoo Notes Swagger",
+        "description": "This is a fundoo notes swagger to access rest API server ",
+        "version": "1.0.0",
+        "license": {
+            "name": "MIT",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "localhost:6006",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "FundooNotes",
+            "description": "API in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "token",
+            "in": "header"
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/user/register": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "Create new user account",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "User registration",
+                        "schema": {
+                            "$ref": "#/definitions/user"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Link is send to your email",
+                        "schema": {
+                            "$ref": "#/definitions/user"
+                        },
+                        "409": {
+                            "description": "User already exist"
+                        },
+                        "400": {
+                            "description": "Invalid input"
+                        },
+                        "422": {
+                            "description": "Unprocessable data"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "Login ",
+                "parameters": [
+                    {
+                        "name": "Login",
+                        "in": "body",
+                        "description": "User login",
+                        "schema": {
+                            "$ref": "#/definitions/login"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Login successful"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "422": {
+                        "description": "Username or password is incorrect"
+                    }
+                }
+            }
+        },
+        "/user/authorization/{token}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "Email verification",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Redirect to login page"
+                    },
+                    "422": {
+                        "description": "Invalid token"
+                    }
+                }
+            }
+        },
+        "/user/forgetpass": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "Forgot ",
+                "parameters": [
+                    {
+                        "name": "Email",
+                        "in": "body",
+                        "description": "Forgot password",
+                        "schema": {
+                            "$ref": "#/definitions/forgot"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Reset password link is sent to your email"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "422": {
+                        "description": "Username is incorrect"
+                    }
+                }
+            }
+        },
+        "/user/resetpass": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "description": "Reset password",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "in": "body",
+                        "description": "Reset password",
+                        "schema": {
+                            "$ref": "#/definitions/reset"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Password reset successfully"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "422": {
+                        "description": "Username is incorrect"
+                    }
+                }
+            }
+        },
+        "/api/file/upload": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "uploads an image",
+                "description": "",
+                "operationId": "uploadFile",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "photos",
+                        "in": "formData",
+                        "description": "file to upload",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Image successful uploaded"
+                    }
+                }
+            }
+        },
+        "/user/notificationlink": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "description": "Reset password",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "Notification token",
+                        "in": "body",
+                        "description": "Firebase token used to notify",
+                        "schema": {
+                            "$ref": "#/definitions/firebasetoken"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token stored successfully"
+                    }
+                }
+            }
+        },
+        "/note/addnote": {
+            "post": {
+                "tags": [
+                    "Note"
+                ],
+                "description": "Create new note",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "note",
+                        "in": "body",
+                        "description": "Create note",
+                        "schema": {
+                            "$ref": "#/definitions/note"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New note is created",
+                        "schema": {
+                            "$ref": "#/definitions/note"
+                        }
+                    }
+                }
+            }
+        },
+        "/note/readnote": {
+            "post": {
+                "tags": [
+                    "Note"
+                ],
+                "description": "Read all notes",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Get all notes based on userId",
+                        "required": true
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "All notes retrived",
+                        "schema": {
+                            "$ref": "#/definitions/note"
+                        }
+                    }
+                }
+            }
+        },
+        "/note/updatetitle": {
+            "put": {
+                "tags": [
+                    "Note"
+                ],
+                "description": "Update title in note",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "title",
+                        "in": "body",
+                        "description": "Update title",
+                        "schema": {
+                            "$ref": "#/definitions/title"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Note title updated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/title"
+                        }
+                    }
+                }
+            }
+        },
+        "/note/updatedesc": {
+            "put": {
+                "tags": [
+                    "Note"
+                ],
+                "description": "Update description in note",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "Update description",
+                        "schema": {
+                            "$ref": "#/definitions/description"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Note description updated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/description"
+                        }
+                    }
+                }
+            }
+        },
+        "/note/updatecolor": {
+            "put": {
+                "tags": [
+                    "Note"
+                ],
+                "description": "Update color in note",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "color",
+                        "in": "body",
+                        "description": "Update color",
+                        "schema": {
+                            "$ref": "#/definitions/color"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Note color updated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/color"
+                        }
+                    }
+                }
+            }
+        },
+        "/note/updatereminder": {
+            "put": {
+                "tags": [
+                    "Note"
+                ],
+                "description": "Update reminder in note",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "reminder",
+                        "in": "body",
+                        "description": "Update reminder",
+                        "schema": {
+                            "$ref": "#/definitions/reminder"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Note reminder updated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/reminder"
+                        }
+                    }
+                }
+            }
+        },
+        "/note/updatearchive": {
+            "put": {
+                "tags": [
+                    "Note"
+                ],
+                "description": "Update archive in note",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "archive",
+                        "in": "body",
+                        "description": "Update archive",
+                        "schema": {
+                            "$ref": "#/definitions/archive"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Note archive updated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/archive"
+                        }
+                    }
+                }
+            }
+        },
+        "/note/updatetrash": {
+            "put": {
+                "tags": [
+                    "Note"
+                ],
+                "description": "Update trash in note",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "trash",
+                        "in": "body",
+                        "description": "Update trash",
+                        "schema": {
+                            "$ref": "#/definitions/trash"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Note trash updated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/trash"
+                        }
+                    }
+                }
+            }
+        },
+        "/note/updatenotelabel": {
+            "put": {
+                "tags": [
+                    "Note"
+                ],
+                "description": "Add label to note",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "Add label on note",
+                        "in": "body",
+                        "description": "Update label on note",
+                        "schema": {
+                            "$ref": "#/definitions/notelabel"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Label updated on note successfully",
+                        "schema": {
+                            "$ref": "#/definitions/notelabel"
+                        }
+                    }
+                }
+            }
+        },
+        "/label/createlabel": {
+            "post": {
+                "tags": [
+                    "Label"
+                ],
+                "description": "Create new label",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Create labels",
+                        "schema": {
+                            "$ref": "#/definitions/createlabel"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New label is created",
+                        "schema": {
+                            "$ref": "#/definitions/label"
+                        }
+                    }
+                }
+            }
+        },
+        "/label/readlabel": {
+            "post": {
+                "tags": [
+                    "Label"
+                ],
+                "description": "Get all labels",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Labels retrived",
+                        "schema": {
+                            "$ref": "#/definitions/labelid"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New label is created",
+                        "schema": {
+                            "$ref": "#/definitions/label"
+                        }
+                    }
+                }
+            }
+        },
+        "/label/updatelabel": {
+            "put": {
+                "tags": [
+                    "Label"
+                ],
+                "description": "update label",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "update label",
+                        "schema": {
+                            "$ref": "#/definitions/updatelabel"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Label updated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/label"
+                        }
+                    }
+                }
+            }
+        },
+        "/label/deletelabel": {
+            "post": {
+                "tags": [
+                    "Label"
+                ],
+                "description": "Delete label",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Label deleted successfully",
+                        "schema": {
+                            "$ref": "#/definitions/labelid"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New label is created",
+                        "schema": {
+                            "$ref": "#/definitions/label"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "user": {
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "unique": true
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "login": {
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "required": true
+                },
+                "password": {
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "forgot": {
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "reset": {
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "firebasetoken": {
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "title": {
+            "properties": {
+                "noteId": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "description": {
+            "properties": {
+                "noteId": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "color": {
+            "properties": {
+                "noteId": {
+                    "type": "string"
+                },
+                "notecolor": {
+                    "type": "string"
+                }
+            }
+        },
+        "archive": {
+            "properties": {
+                "noteId": {
+                    "type": "string"
+                },
+                "archive": {
+                    "type": "string"
+                }
+            }
+        },
+        "trash": {
+            "properties": {
+                "noteId": {
+                    "type": "string"
+                },
+                "trash": {
+                    "type": "string"
+                }
+            }
+        },
+        "reminder": {
+            "properties": {
+                "noteId": {
+                    "type": "string"
+                },
+                "reminder": {
+                    "type": "string"
+                }
+            }
+        },
+        "notelabel": {
+            "properties": {
+                "noteId": {
+                    "type": "string"
+                },
+                "labelId": {
+                    "type": "string"
+                }
+            }
+        },
+        "note": {
+            "properties": {
+                "userId": {
+                    "type": "apiKey"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "reminder": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "notecolor": {
+                    "type": "string"
+                },
+                "archive": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "trash": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "notelabel": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "label": {
+            "properties": {
+                "userId": {
+                    "type": "mongoose.Schema.Types.ObjectId",
+                    "require": true,
+                    "ref": "userSchema"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "isdeleted": {
+                    "type": "boolean",
+                    "default": false
+                }
+            }
+        },
+        "createlabel": {
+            "properties": {
+                "label": {
+                    "type": "string"
+                }
+            }
+        },
+        "labelid": {
+            "properties": {
+                "labelId": {
+                    "type": "string"
+                }
+            }
+        },
+        "updatelabel": {
+            "properties": {
+                "labelId": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
