@@ -216,14 +216,14 @@ User.prototype.forgetPass = async (body) => {
         let data = await userObj.findOne({ 'email': body.email })
         log.logger.info(data)
         if (data !== '') {
-            let emailToken = await genTokenObj.genToken(data)
-            let url = process.env.reserurl + emailToken;
-            log.logger.info( url)
-            let mailContents = {
-                subject:'Fundoo Notes account recovery...!',
-                html:`To recover account click on this link\n\n'<a href="${url}">${url}</a>"`
-            }
-            mailObj.mailer(data.email,mailContents)
+            // let emailToken = await genTokenObj.genToken(data)
+            // let url = process.env.reserurl + emailToken;
+            // log.logger.info( url)
+            // let mailContents = {
+            //     subject:'Fundoo Notes account recovery...!',
+            //     html:`To recover account click on this link\n\n'<a href="${url}">${url}</a>"`
+            // }
+            // mailObj.mailer(data.email,mailContents)
             response.message = 'Reset password link is sent to your email'
         }
         else {
