@@ -146,7 +146,7 @@ User.prototype.login = async (body) => {
         if (data) {
             let isMatch = await bcrypt.compare(body.password, data.password)
             if (isMatch) {
-                if (data.confirmed) {
+                // if (data.confirmed) {
                     let token = await genTokenObj.genToken(data)
                    await client.set('user'+data.id,token,redis.print)    
                         
@@ -155,11 +155,11 @@ User.prototype.login = async (body) => {
                         token:token,
                         user:data
                     }
-                }
-                else {
-                    response.status = false,
-                    response.message = 'Email is not verified'
-                }
+                // }
+                // else {
+                //     response.status = false,
+                //     response.message = 'Email is not verified'
+                // }
             }
             else {
                 response.status = false,
